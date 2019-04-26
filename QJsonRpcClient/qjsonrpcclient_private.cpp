@@ -80,9 +80,6 @@ uint QJsonRpcClient_private::rpcCall(QString method, QJsonObject postData)
     QJsonDocument doc(rpcReq);
     QByteArray data = doc.toJson(QJsonDocument::Compact);
 
-    qDebug() << "post data";
-    qDebug() << data;
-
     QNetworkRequest req(_url);
     req.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
     QNetworkReply *reply = _network.post(req, data);
@@ -141,21 +138,13 @@ void QJsonRpcClient_private::httpFinished()
 {
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     ReleaseReply(reply);
-
-    QByteArray result = reply->readAll();
-    qDebug() << result;
-
-    qDebug() << "reply finished";
 }
 
 void QJsonRpcClient_private::httpReadyRead()
 {
-    qDebug() << "reply ready read";
-
     QNetworkReply *reply = qobject_cast<QNetworkReply *>(sender());
     QString *pID = (QString*)reply->userData(REPLY_ROLE_ID);
     if (pID == nullptr) {
-        qDebug() << "null id data";
         return;
     }
     uint rid = pID->toUInt();
@@ -165,8 +154,6 @@ void QJsonRpcClient_private::httpReadyRead()
     QJsonDocument doc = QJsonDocument::fromJson(result);
     QJsonObject json = doc.object();
     emit rpcReply(rid, json);
-
-    qDebug() << result;
 }
 
 void QJsonRpcClient_private::sslErrors(QNetworkReply *reply, const QList<QSslError> &errors)
