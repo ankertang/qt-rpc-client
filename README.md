@@ -4,7 +4,7 @@ Qt C++/QML Rpc call Golang Rpc server
 
 ## QJsonRpcClient
 
-the Qt json rpc client implement
+the Qt json rpc client implementation
 
 ## RpcClient
 
