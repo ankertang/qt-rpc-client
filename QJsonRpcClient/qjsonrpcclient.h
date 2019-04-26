@@ -42,6 +42,7 @@ class QJsonRpcClient : public QObject
     Q_OBJECT
 public:
     QJsonRpcClient(QString addr, int port, bool tls);
+    virtual ~QJsonRpcClient();
 
     // rpc call
     Q_INVOKABLE uint rpcCall(QString method, QJsonObject postData);

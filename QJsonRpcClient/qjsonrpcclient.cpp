@@ -37,6 +37,11 @@ QJsonRpcClient::QJsonRpcClient(QString addr, int port, bool tls) : QObject ()
     connect(p, SIGNAL(rpcReply(uint,QJsonObject)), this, SIGNAL(rpcReply(uint,QJsonObject)));
 }
 
+QJsonRpcClient::~QJsonRpcClient()
+{
+    delete p;
+}
+
 // rpc call
 uint QJsonRpcClient::rpcCall(QString method, QJsonObject postData)
 {
