@@ -94,7 +94,7 @@ uint QJsonRpcClient_private::rpcCall(QString method, QJsonObject postData)
 // set replay userdata
 void QJsonRpcClient_private::SetReplyUserdata(QNetworkReply *reply, uint requestID)
 {
-    QString *pID = new QString(requestID);
+    QString *pID = new QString(QString::number(requestID));
     QTimer *timer = new QTimer();
     timer->setInterval(TIMEOUT_SECOND * 1000);
     timer->setSingleShot(true);
